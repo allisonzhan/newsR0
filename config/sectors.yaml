@@ -1,0 +1,66 @@
+sectors:
+  - name: Geopolitical
+    sub_sectors: []
+
+  - name: Macroeconomic
+    sub_sectors: []
+
+  - name: Commodities
+    sub_sectors:
+      - name: Metals
+        sub_sectors:
+          - name: Precious
+            keywords_hint: [Gold, Silver, Platinum, Palladium]
+          - name: Base
+            keywords_hint: [Copper, Aluminum, Zinc, Nickel, Lead, Tin]
+          - name: Ferrous
+            keywords_hint: [Iron Ore, Steel, Scrap]
+      - name: Energy
+        sub_sectors:
+          - name: Oil & Gas
+            keywords_hint: [Crude, Brent, WTI, Natural Gas, LNG, OPEC]
+          - name: Power & Electricity
+            keywords_hint: [electricity, power grid, utility]
+          - name: Renewables
+            keywords_hint: [solar, wind, renewable, green energy]
+      - name: Agriculture
+        sub_sectors:
+          - name: Grains
+            keywords_hint: [Wheat, Corn, Soybeans, Rice, WASDE]
+          - name: Softs
+            keywords_hint: [Coffee, Cocoa, Sugar, Cotton, Orange Juice]
+          - name: Livestock
+            keywords_hint: [Cattle, Hogs, Dairy, beef, pork]
+
+  - name: Central Banks & Monetary Policy
+    sub_sectors: []
+
+  - name: Equities & Markets
+    sub_sectors: []
+
+  - name: Fixed Income & Rates
+    sub_sectors: []
+
+  - name: FX & Currencies
+    sub_sectors: []
+
+  - name: Crypto & Digital Assets
+    sub_sectors: []
+
+  - name: Trade & Tariffs
+    sub_sectors: []
+
+  - name: Seasonal & Weather
+    sub_sectors:
+      - name: Crop Weather
+        keywords_hint: [drought, frost, rainfall, crop conditions]
+      - name: Energy Demand Weather
+        keywords_hint: [cold snap, heatwave, heating demand, cooling demand]
+      - name: Disaster & Supply Disruption
+        keywords_hint: [hurricane, flood, wildfire, supply disruption]
+
+  - name: Regulatory & Policy
+    sub_sectors: []
+
+  - name: Corporate & Earnings
+    sub_sectors: []

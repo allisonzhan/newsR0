@@ -1,0 +1,40 @@
+# ── Python ─────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# ── Virtual environments ───────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── Database ───────────────────────────────────────────────
+db/newsR0.db
+db/*.db
+*.sqlite
+*.sqlite3
+
+# ── Logs ───────────────────────────────────────────────────
+logs/*.log
+
+# ── IDE / OS ───────────────────────────────────────────────
+.env
+.env.*
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ── Playwright ─────────────────────────────────────────────
+playwright-report/
+test-results/

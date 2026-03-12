@@ -1,0 +1,24 @@
+# ── Web framework ──────────────────────────────────────────
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+
+# ── Database ───────────────────────────────────────────────
+sqlalchemy==2.0.35
+
+# ── Scraping ───────────────────────────────────────────────
+feedparser==6.0.11
+requests==2.32.3
+beautifulsoup4==4.12.3
+lxml==5.3.0
+
+# ── Deduplication ──────────────────────────────────────────
+rapidfuzz==3.10.0
+
+# ── Scheduling ─────────────────────────────────────────────
+apscheduler==3.10.4
+
+# ── Config ─────────────────────────────────────────────────
+pyyaml==6.0.2
+
+# ── Optional: JS-rendered page scraping (Phase 4) ──────────
+# playwright==1.47.0   # uncomment + run: playwright install chromium

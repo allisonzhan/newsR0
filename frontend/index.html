@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>newsR0 — Intelligent News Aggregator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-left">
+      <span class="logo">newsR0</span>
+    </div>
+    <div class="header-center">
+      <input
+        type="search"
+        id="search-input"
+        class="search-bar"
+        placeholder="Search headlines, sources, topics…"
+        autocomplete="off"
+      />
+    </div>
+    <div class="header-right">
+      <span id="last-refresh-label" class="refresh-label">Last refresh: —</span>
+      <button id="refresh-btn" class="btn btn-primary">Refresh Now</button>
+      <span id="refresh-spinner" class="spinner hidden" title="Refreshing…"></span>
+    </div>
+  </header>
+
+  <!-- ===== ACTIVE FILTER CHIPS ===== -->
+  <div id="active-filters" class="active-filters hidden">
+    <span class="chips-label">Filters:</span>
+    <div id="filter-chips" class="filter-chips"></div>
+    <button id="clear-all-btn" class="btn btn-ghost">Clear All</button>
+  </div>
+
+  <!-- ===== MAIN LAYOUT ===== -->
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">Date Range</h3>
+        <div class="date-filter">
+          <label class="radio-label">
+            <input type="radio" name="date-range" value="24h" /> Last 24 h
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="date-range" value="7d" checked /> Last 7 days
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="date-range" value="30d" /> Last 30 days
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="date-range" value="all" /> All time
+          </label>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">Sectors</h3>
+        <div id="sector-list" class="sector-list">
+          <!-- Populated by app.js -->
+        </div>
+      </div>
+
+      <div class="sidebar-section" id="source-filter-section">
+        <h3 class="sidebar-title">Sources</h3>
+        <div id="source-list" class="source-list">
+          <!-- Populated by app.js -->
+        </div>
+      </div>
+    </aside>
+
+    <!-- ARTICLE FEED -->
+    <main class="feed" id="feed">
+      <div id="feed-status" class="feed-status"></div>
+      <div id="article-list" class="article-list">
+        <!-- Populated by app.js -->
+      </div>
+      <div id="load-more-container" class="load-more-container hidden">
+        <button id="load-more-btn" class="btn btn-ghost">Load more</button>
+      </div>
+    </main>
+
+  </div><!-- /.layout -->
+
+  <script src="app.js"></script>
+</body>
+</html>

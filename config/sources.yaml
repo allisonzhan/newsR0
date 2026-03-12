@@ -1,0 +1,185 @@
+sources:
+  # General / Multi-Sector
+  - name: Reuters
+    url: https://feeds.reuters.com/reuters/businessNews
+    type: rss
+    default_sector: Macroeconomic
+    enabled: true
+
+  - name: Associated Press
+    url: https://rsshub.app/apnews/topics/apf-business
+    type: rss
+    default_sector: Macroeconomic
+    enabled: true
+
+  - name: MarketWatch
+    url: https://feeds.content.dowjones.io/public/rss/mw_realtimeheadlines
+    type: rss
+    default_sector: Equities & Markets
+    enabled: true
+
+  - name: CNBC
+    url: https://www.cnbc.com/id/100003114/device/rss/rss.html
+    type: rss
+    default_sector: Equities & Markets
+    enabled: true
+
+  - name: Yahoo Finance
+    url: https://finance.yahoo.com/news/rssindex
+    type: rss
+    default_sector: Macroeconomic
+    enabled: true
+
+  # Geopolitical
+  - name: Al Jazeera
+    url: https://www.aljazeera.com/xml/rss/all.xml
+    type: rss
+    default_sector: Geopolitical
+    enabled: true
+
+  - name: BBC World
+    url: https://feeds.bbci.co.uk/news/world/rss.xml
+    type: rss
+    default_sector: Geopolitical
+    enabled: true
+
+  - name: Council on Foreign Relations
+    url: https://www.cfr.org/rss.xml
+    type: rss
+    default_sector: Geopolitical
+    enabled: true
+
+  - name: Foreign Policy
+    url: https://foreignpolicy.com/feed/
+    type: rss
+    default_sector: Geopolitical
+    enabled: true
+
+  # Commodities — Metals
+  - name: Kitco
+    url: https://www.kitco.com/rss/kitco-gold.xml
+    type: rss
+    default_sector: Commodities
+    default_sub_sector: Metals
+    enabled: true
+
+  - name: Mining.com
+    url: https://www.mining.com/feed/
+    type: rss
+    default_sector: Commodities
+    default_sub_sector: Metals
+    enabled: true
+
+  - name: World Gold Council
+    url: https://www.gold.org/goldhub/rss.xml
+    type: rss
+    default_sector: Commodities
+    default_sub_sector: Metals.Precious
+    enabled: true
+
+  # Commodities — Energy
+  - name: OilPrice
+    url: https://oilprice.com/rss/main
+    type: rss
+    default_sector: Commodities
+    default_sub_sector: Energy
+    enabled: true
+
+  - name: EIA
+    url: https://www.eia.gov/rss/todayinenergy.xml
+    type: rss
+    default_sector: Commodities
+    default_sub_sector: Energy
+    enabled: true
+
+  # Commodities — Agriculture
+  - name: USDA Press Releases
+    url: https://www.usda.gov/rss/home.xml
+    type: rss
+    default_sector: Commodities
+    default_sub_sector: Agriculture
+    enabled: true
+
+  - name: Grain Central
+    url: https://www.graincentral.com/feed/
+    type: rss
+    default_sector: Commodities
+    default_sub_sector: Agriculture.Grains
+    enabled: true
+
+  # Central Banks / Macro
+  - name: Federal Reserve
+    url: https://www.federalreserve.gov/feeds/press_all.xml
+    type: rss
+    default_sector: Central Banks & Monetary Policy
+    enabled: true
+
+  - name: ECB
+    url: https://www.ecb.europa.eu/rss/press.html
+    type: rss
+    default_sector: Central Banks & Monetary Policy
+    enabled: true
+
+  - name: IMF News
+    url: https://www.imf.org/en/News/rss?language=eng
+    type: rss
+    default_sector: Central Banks & Monetary Policy
+    enabled: true
+
+  - name: BIS
+    url: https://www.bis.org/doclist/all_speeches.rss
+    type: rss
+    default_sector: Central Banks & Monetary Policy
+    enabled: true
+
+  # Seasonal / Weather
+  - name: NOAA
+    url: https://www.noaa.gov/news-features/rss.xml
+    type: rss
+    default_sector: Seasonal & Weather
+    enabled: true
+
+  - name: WMO
+    url: https://public.wmo.int/en/rss.xml
+    type: rss
+    default_sector: Seasonal & Weather
+    enabled: true
+
+  - name: AccuWeather
+    url: https://www.accuweather.com/en/weather-news/rss
+    type: rss
+    default_sector: Seasonal & Weather
+    enabled: true
+
+  # HTML-scraped sources (Phase 4)
+  - name: Bloomberg
+    url: https://www.bloomberg.com/markets
+    type: html
+    default_sector: Macroeconomic
+    enabled: false  # Requires Playwright — Phase 4
+
+  - name: Financial Times
+    url: https://www.ft.com/markets
+    type: html
+    default_sector: Macroeconomic
+    enabled: false  # Requires Playwright — Phase 4
+
+  - name: Wall Street Journal
+    url: https://www.wsj.com/news/markets
+    type: html
+    default_sector: Macroeconomic
+    enabled: false  # Requires Playwright — Phase 4
+
+  - name: Fastmarkets
+    url: https://www.fastmarkets.com/insights/
+    type: html
+    default_sector: Commodities
+    default_sub_sector: Metals
+    enabled: false  # Requires Playwright — Phase 4
+
+  - name: Natural Gas Intelligence
+    url: https://www.naturalgasintel.com/
+    type: html
+    default_sector: Commodities
+    default_sub_sector: Energy.Oil & Gas
+    enabled: false  # Requires Playwright — Phase 4

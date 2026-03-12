@@ -1,0 +1,362 @@
+sector_keywords:
+  Geopolitical:
+    - sanctions
+    - conflict
+    - war
+    - treaty
+    - NATO
+    - diplomatic
+    - geopolitical
+    - military
+    - invasion
+    - ceasefire
+    - bilateral
+    - multilateral
+    - embassy
+    - UN Security Council
+    - foreign policy
+    - coup
+    - election
+    - referendum
+    - protest
+    - civil unrest
+
+  Macroeconomic:
+    - GDP
+    - inflation
+    - CPI
+    - PPI
+    - unemployment
+    - jobs report
+    - nonfarm payrolls
+    - recession
+    - economic growth
+    - monetary policy
+    - fiscal policy
+    - interest rate
+    - budget deficit
+    - trade balance
+    - current account
+    - PMI
+    - ISM
+    - retail sales
+    - consumer confidence
+    - housing starts
+
+  Commodities:
+    - commodity
+    - futures
+    - spot price
+    - supply chain
+    - inventory
+    - stockpile
+
+  Commodities.Metals:
+    - metals
+    - mining
+    - ore
+    - smelting
+    - refinery
+
+  Commodities.Metals.Precious:
+    - gold
+    - silver
+    - platinum
+    - palladium
+    - bullion
+    - XAU
+    - XAG
+    - precious metals
+    - gold price
+    - silver price
+
+  Commodities.Metals.Base:
+    - copper
+    - aluminum
+    - aluminium
+    - zinc
+    - nickel
+    - lead
+    - tin
+    - base metals
+    - LME
+    - copper price
+
+  Commodities.Metals.Ferrous:
+    - iron ore
+    - steel
+    - scrap metal
+    - pig iron
+    - rebar
+    - hot-rolled coil
+    - HRC
+
+  Commodities.Energy:
+    - energy
+    - energy market
+    - power generation
+    - fuel
+
+  Commodities.Energy.Oil & Gas:
+    - crude
+    - crude oil
+    - WTI
+    - Brent
+    - OPEC
+    - OPEC+
+    - barrel
+    - natural gas
+    - LNG
+    - liquefied natural gas
+    - pipeline
+    - refinery
+    - petroleum
+    - gasoline
+    - diesel
+    - oil price
+    - shale
+    - fracking
+
+  Commodities.Energy.Power & Electricity:
+    - electricity
+    - power grid
+    - utility
+    - kilowatt
+    - megawatt
+    - grid operator
+    - transmission line
+    - power plant
+
+  Commodities.Energy.Renewables:
+    - solar
+    - wind energy
+    - renewable
+    - green energy
+    - clean energy
+    - hydropower
+    - biomass
+    - geothermal
+    - offshore wind
+    - photovoltaic
+
+  Commodities.Agriculture:
+    - agriculture
+    - crop
+    - harvest
+    - farm
+    - agricultural
+    - USDA
+    - WASDE
+
+  Commodities.Agriculture.Grains:
+    - wheat
+    - corn
+    - soybeans
+    - soybean
+    - rice
+    - barley
+    - oats
+    - grain
+    - cereal
+    - WASDE
+    - crop report
+    - bushel
+    - planting
+    - yield
+
+  Commodities.Agriculture.Softs:
+    - coffee
+    - cocoa
+    - sugar
+    - cotton
+    - orange juice
+    - OJ
+    - arabica
+    - robusta
+    - soft commodities
+    - ICE futures
+
+  Commodities.Agriculture.Livestock:
+    - cattle
+    - hogs
+    - dairy
+    - beef
+    - pork
+    - poultry
+    - livestock
+    - meat
+    - milk
+    - feeder cattle
+    - live cattle
+
+  Central Banks & Monetary Policy:
+    - Federal Reserve
+    - Fed
+    - FOMC
+    - ECB
+    - European Central Bank
+    - Bank of England
+    - BoE
+    - Bank of Japan
+    - BoJ
+    - central bank
+    - interest rate
+    - rate hike
+    - rate cut
+    - quantitative easing
+    - QE
+    - tapering
+    - balance sheet
+    - monetary policy
+    - Jerome Powell
+    - Christine Lagarde
+    - BIS
+    - IMF
+    - World Bank
+
+  Equities & Markets:
+    - stock market
+    - equities
+    - S&P 500
+    - Dow Jones
+    - Nasdaq
+    - earnings
+    - IPO
+    - shares
+    - stock price
+    - market rally
+    - market selloff
+    - bull market
+    - bear market
+    - index fund
+    - ETF
+
+  Fixed Income & Rates:
+    - bonds
+    - Treasury
+    - yield curve
+    - yield
+    - fixed income
+    - credit
+    - debt
+    - bond market
+    - 10-year
+    - spread
+    - investment grade
+    - high yield
+    - junk bond
+    - duration
+
+  FX & Currencies:
+    - forex
+    - FX
+    - currency
+    - dollar
+    - USD
+    - euro
+    - EUR
+    - yen
+    - JPY
+    - pound
+    - GBP
+    - exchange rate
+    - devaluation
+    - currency war
+    - DXY
+
+  Crypto & Digital Assets:
+    - bitcoin
+    - BTC
+    - ethereum
+    - ETH
+    - crypto
+    - cryptocurrency
+    - blockchain
+    - digital asset
+    - stablecoin
+    - DeFi
+    - NFT
+    - altcoin
+    - SEC crypto
+    - crypto regulation
+
+  Trade & Tariffs:
+    - tariff
+    - trade war
+    - import duty
+    - export ban
+    - trade deal
+    - WTO
+    - trade agreement
+    - customs
+    - protectionism
+    - trade deficit
+    - trade surplus
+    - sanctions
+
+  Seasonal & Weather:
+    - weather
+    - forecast
+    - climate
+    - seasonal
+
+  Seasonal & Weather.Crop Weather:
+    - drought
+    - frost
+    - rainfall
+    - crop conditions
+    - growing season
+    - planting weather
+    - La Nina
+    - El Nino
+    - precipitation
+    - soil moisture
+
+  Seasonal & Weather.Energy Demand Weather:
+    - cold snap
+    - heatwave
+    - heating demand
+    - cooling demand
+    - polar vortex
+    - temperature forecast
+    - natural gas demand
+
+  Seasonal & Weather.Disaster & Supply Disruption:
+    - hurricane
+    - flood
+    - wildfire
+    - earthquake
+    - tsunami
+    - supply disruption
+    - force majeure
+    - infrastructure damage
+
+  Regulatory & Policy:
+    - regulation
+    - legislation
+    - policy
+    - compliance
+    - law
+    - SEC
+    - CFTC
+    - EPA
+    - antitrust
+    - merger approval
+    - government policy
+    - executive order
+
+  Corporate & Earnings:
+    - earnings
+    - quarterly results
+    - revenue
+    - profit
+    - loss
+    - guidance
+    - merger
+    - acquisition
+    - M&A
+    - CEO
+    - bankruptcy
+    - restructuring
+    - dividend
+    - buyback
