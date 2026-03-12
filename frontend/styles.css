@@ -134,44 +134,6 @@ a:hover { color: var(--color-accent-hover); text-decoration: underline; }
 .btn-ghost:hover { background: var(--color-surface-2); color: var(--color-text); }
 
 /* =========================================================
-   ACTIVE FILTER CHIPS
-   ========================================================= */
-.active-filters {
-  position: fixed;
-  top: var(--header-height);
-  left: var(--sidebar-width);
-  right: 0;
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
-  padding: 0.45rem 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-  z-index: 90;
-}
-.chips-label { font-size: 0.78rem; color: var(--color-text-muted); }
-.filter-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  background: var(--color-surface-2);
-  border: 1px solid var(--color-border);
-  border-radius: 100px;
-  padding: 0.2rem 0.65rem;
-  font-size: 0.75rem;
-  color: var(--color-text);
-}
-.chip-remove {
-  cursor: pointer;
-  color: var(--color-text-muted);
-  font-size: 0.85rem;
-  line-height: 1;
-}
-.chip-remove:hover { color: var(--color-error); }
-
-/* =========================================================
    LAYOUT — sidebar + feed
    ========================================================= */
 .layout {
@@ -220,35 +182,30 @@ input[type="radio"] { accent-color: var(--color-accent); }
 /* Sector & Source lists */
 .sector-list, .source-list { display: flex; flex-direction: column; gap: 0.1rem; }
 
-.sector-item {
-  display: flex;
-  flex-direction: column;
-}
 .sector-label {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 0.4rem;
-  padding: 0.3rem 0.5rem;
+  padding: 0.35rem 0.5rem;
   border-radius: var(--radius);
   cursor: pointer;
   font-size: 0.83rem;
   color: var(--color-text);
   user-select: none;
-  transition: background 0.12s;
+  transition: background 0.12s, color 0.12s;
 }
-.sector-label:hover, .sector-label.active { background: var(--color-surface-2); color: var(--color-accent); }
-.sector-label.active { font-weight: 600; }
-.sector-toggle { font-size: 0.7rem; color: var(--color-text-muted); }
+.sector-label:hover { background: var(--color-surface-2); }
+.sector-label.active { background: var(--color-surface-2); color: var(--color-accent); font-weight: 600; }
 
-.subsector-list {
-  display: none;
+.subsector-container {
+  display: flex;
   flex-direction: column;
   gap: 0.1rem;
-  padding-left: 1rem;
-  margin-top: 0.1rem;
+  padding-left: 0.75rem;
+  margin: 0.25rem 0;
+  border-left: 2px solid var(--color-border);
+  padding: 0.25rem 0 0.25rem 0.65rem;
 }
-.subsector-list.open { display: flex; }
 
 .subsector-label {
   padding: 0.25rem 0.5rem;
@@ -258,9 +215,14 @@ input[type="radio"] { accent-color: var(--color-accent); }
   color: var(--color-text-muted);
   transition: background 0.12s, color 0.12s;
 }
-.subsector-label:hover, .subsector-label.active {
+.subsector-label:hover {
+  background: var(--color-surface-2);
+  color: var(--color-text);
+}
+.subsector-label.active {
   background: var(--color-surface-2);
   color: var(--color-accent);
+  font-weight: 600;
 }
 
 .source-item {

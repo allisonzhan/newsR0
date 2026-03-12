@@ -9,8 +9,8 @@ const PAGE_SIZE = 50;
 // ── State ──────────────────────────────────────────────────────────────────
 const state = {
   q: "",
-  sectors: [],          // selected top-level sectors
-  subSectors: [],       // selected sub-sectors
+  sector: null,         // single selected sector (page-like navigation)
+  subSector: null,      // single selected subsector within a sector
   sources: [],          // selected sources (empty = all)
   dateRange: "7d",      // 24h | 7d | 30d | all
   offset: 0,
@@ -27,9 +27,6 @@ const searchInput       = $("search-input");
 const refreshBtn        = $("refresh-btn");
 const refreshSpinner    = $("refresh-spinner");
 const lastRefreshLabel  = $("last-refresh-label");
-const activeFiltersBar  = $("active-filters");
-const filterChips       = $("filter-chips");
-const clearAllBtn       = $("clear-all-btn");
 const sectorList        = $("sector-list");
 const sourceList        = $("source-list");
 const articleList       = $("article-list");
@@ -70,8 +67,8 @@ function dateRangeToISO(range) {
 function buildQuery(offset = 0) {
   const params = new URLSearchParams();
   if (state.q)            params.set("q", state.q);
-  if (state.sectors.length)   params.set("sector", state.sectors.join(","));
-  if (state.subSectors.length) params.set("sub_sector", state.subSectors.join(","));
+  if (state.sector)       params.set("sector", state.sector);
+  if (state.subSector)    params.set("sub_sector", state.subSector);
   if (state.sources.length)   params.set("source", state.sources.join(","));
   const fromDate = dateRangeToISO(state.dateRange);
   if (fromDate) params.set("from_date", fromDate);
@@ -198,52 +195,41 @@ function renderArticles(append = false) {
 
 function renderSectorSidebar() {
   sectorList.innerHTML = "";
+  
+  // Add "All Sectors" button
+  const allBtn = document.createElement("div");
+  allBtn.className = "sector-label" + (state.sector === null ? " active" : "");
+  allBtn.textContent = "All Sectors";
+  allBtn.dataset.sector = "all";
+  allBtn.addEventListener("click", () => selectSector(null, allBtn));
+  sectorList.appendChild(allBtn);
+  
   state.allSectors.forEach((sector) => {
     const hasChildren = sector.sub_sectors && sector.sub_sectors.length > 0;
-    const item = document.createElement("div");
-    item.className = "sector-item";
-
+    
+    // Sector button
     const label = document.createElement("div");
-    label.className = "sector-label";
+    label.className = "sector-label" + (state.sector === sector.name ? " active" : "");
+    label.textContent = sector.name;
     label.dataset.sector = sector.name;
-    label.innerHTML = `
-      <span>${escHtml(sector.name)}</span>
-      ${hasChildren ? `<span class="sector-toggle">▸</span>` : ""}
-    `;
-    label.addEventListener("click", () => toggleSector(sector.name, label, subList));
-    item.appendChild(label);
-
-    const subList = document.createElement("div");
-    subList.className = "subsector-list";
-    if (hasChildren) {
-      renderSubSectors(sector.sub_sectors, subList, sector.name);
-    }
-    item.appendChild(subList);
-    sectorList.appendChild(item);
-  });
-}
-
-function renderSubSectors(subSectors, container, parentPath) {
-  subSectors.forEach((sub) => {
-    const hasChildren = sub.sub_sectors && sub.sub_sectors.length > 0;
-    const fullPath = `${parentPath}.${sub.name}`;
-
-    const label = document.createElement("div");
-    label.className = "subsector-label";
-    label.dataset.subsector = sub.name;
-    label.textContent = sub.name;
-    label.addEventListener("click", (e) => {
-      e.stopPropagation();
-      toggleSubSector(sub.name, label);
-    });
-    container.appendChild(label);
-
-    if (hasChildren) {
-      const nestedList = document.createElement("div");
-      nestedList.className = "subsector-list";
-      nestedList.style.paddingLeft = "0.75rem";
-      renderSubSectors(sub.sub_sectors, nestedList, fullPath);
-      container.appendChild(nestedList);
+    label.addEventListener("click", () => selectSector(sector.name, label));
+    sectorList.appendChild(label);
+    
+    // Subsectors (shown only if this sector is selected)
+    if (hasChildren && state.sector === sector.name) {
+      const subContainer = document.createElement("div");
+      subContainer.className = "subsector-container";
+      
+      sector.sub_sectors.forEach((sub) => {
+        const subLabel = document.createElement("div");
+        subLabel.className = "subsector-label" + (state.subSector === sub.name ? " active" : "");
+        subLabel.textContent = sub.name;
+        subLabel.dataset.subsector = sub.name;
+        subLabel.addEventListener("click", () => selectSubSector(sub.name, subLabel));
+        subContainer.appendChild(subLabel);
+      });
+      
+      sectorList.appendChild(subContainer);
     }
   });
 }
@@ -267,58 +253,26 @@ function renderSourceSidebar() {
   });
 }
 
-function renderChips() {
-  filterChips.innerHTML = "";
-  const chips = [];
 
-  if (state.q) chips.push({ label: `"${state.q}"`, remove: () => { state.q = ""; searchInput.value = ""; } });
-  state.sectors.forEach((s)    => chips.push({ label: `Sector: ${s}`,     remove: () => removeSector(s) }));
-  state.subSectors.forEach((s) => chips.push({ label: `Sub: ${s}`,        remove: () => removeSubSector(s) }));
-  state.sources.forEach((s)    => chips.push({ label: `Source: ${s}`,     remove: () => removeSource(s) }));
-  if (state.dateRange !== "7d") chips.push({ label: `Date: ${state.dateRange}`, remove: () => { state.dateRange = "7d"; document.querySelector('input[name="date-range"][value="7d"]').checked = true; } });
-
-  chips.forEach(({ label, remove }) => {
-    const chip = document.createElement("span");
-    chip.className = "chip";
-    chip.innerHTML = `${escHtml(label)} <span class="chip-remove" title="Remove">×</span>`;
-    chip.querySelector(".chip-remove").addEventListener("click", () => { remove(); applyFilters(); });
-    filterChips.appendChild(chip);
-  });
-
-  if (chips.length > 0) {
-    activeFiltersBar.classList.remove("hidden");
-  } else {
-    activeFiltersBar.classList.add("hidden");
-  }
-}
 
 // ── Filter toggles ─────────────────────────────────────────────────────────
-function toggleSector(name, labelEl, subList) {
-  const idx = state.sectors.indexOf(name);
-  if (idx === -1) {
-    state.sectors.push(name);
-    labelEl.classList.add("active");
-  } else {
-    state.sectors.splice(idx, 1);
-    labelEl.classList.remove("active");
-  }
-  if (subList && subList.children.length > 0) {
-    subList.classList.toggle("open");
-    const toggle = labelEl.querySelector(".sector-toggle");
-    if (toggle) toggle.textContent = subList.classList.contains("open") ? "▾" : "▸";
-  }
+function selectSector(name, labelEl) {
+  // Clear previous active sectors
+  document.querySelectorAll(".sector-label.active").forEach((el) => el.classList.remove("active"));
+  
+  state.sector = name;
+  state.subSector = null; // Clear subsector when changing sectors
+  labelEl.classList.add("active");
+  renderSectorSidebar(); // Re-render to show/hide subsectors
   applyFilters();
 }
 
-function toggleSubSector(name, labelEl) {
-  const idx = state.subSectors.indexOf(name);
-  if (idx === -1) {
-    state.subSectors.push(name);
-    labelEl.classList.add("active");
-  } else {
-    state.subSectors.splice(idx, 1);
-    labelEl.classList.remove("active");
-  }
+function selectSubSector(name, labelEl) {
+  // Clear previous active subsectors
+  document.querySelectorAll(".subsector-label.active").forEach((el) => el.classList.remove("active"));
+  
+  state.subSector = name;
+  labelEl.classList.add("active");
   applyFilters();
 }
 
@@ -334,22 +288,6 @@ function toggleSource(name, itemEl) {
   applyFilters();
 }
 
-function removeSector(name) {
-  state.sectors = state.sectors.filter((s) => s !== name);
-  document.querySelectorAll(".sector-label").forEach((el) => {
-    if (el.dataset.sector === name) el.classList.remove("active");
-  });
-  applyFilters();
-}
-
-function removeSubSector(name) {
-  state.subSectors = state.subSectors.filter((s) => s !== name);
-  document.querySelectorAll(".subsector-label").forEach((el) => {
-    if (el.dataset.subsector === name) el.classList.remove("active");
-  });
-  applyFilters();
-}
-
 function removeSource(name) {
   state.sources = state.sources.filter((s) => s !== name);
   document.querySelectorAll(".source-item").forEach((el) => {
@@ -358,23 +296,7 @@ function removeSource(name) {
   applyFilters();
 }
 
-function clearAllFilters() {
-  state.q = "";
-  state.sectors = [];
-  state.subSectors = [];
-  state.sources = [];
-  state.dateRange = "7d";
-  searchInput.value = "";
-  document.querySelectorAll(".sector-label.active").forEach((el) => el.classList.remove("active"));
-  document.querySelectorAll(".subsector-label.active").forEach((el) => el.classList.remove("active"));
-  document.querySelectorAll(".source-item.active").forEach((el) => el.classList.remove("active"));
-  document.querySelectorAll(".subsector-list.open").forEach((el) => el.classList.remove("open"));
-  document.querySelector('input[name="date-range"][value="7d"]').checked = true;
-  applyFilters();
-}
-
 function applyFilters() {
-  renderChips();
   fetchArticles();
 }
 
@@ -405,7 +327,6 @@ searchInput.addEventListener("input", () => {
 });
 
 refreshBtn.addEventListener("click", triggerRefresh);
-clearAllBtn.addEventListener("click", clearAllFilters);
 loadMoreBtn.addEventListener("click", () => fetchArticles(true));
 
 document.querySelectorAll('input[name="date-range"]').forEach((radio) => {
