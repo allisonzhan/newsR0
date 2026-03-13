@@ -34,6 +34,15 @@ const feedStatus        = $("feed-status");
 const loadMoreBtn       = $("load-more-btn");
 const loadMoreContainer = $("load-more-container");
 
+// Debug: verify DOM elements exist
+console.log("newsR0: DOM ready check", {
+  searchInput: !!searchInput,
+  refreshBtn: !!refreshBtn,
+  articleList: !!articleList,
+  sectorList: !!sectorList,
+  sourceList: !!sourceList
+});
+
 // ── Helpers ────────────────────────────────────────────────────────────────
 function relativeTime(isoString) {
   if (!isoString) return "";
@@ -338,6 +347,13 @@ document.querySelectorAll('input[name="date-range"]').forEach((radio) => {
 
 // ── Bootstrap ──────────────────────────────────────────────────────────────
 (async function init() {
-  await Promise.all([fetchSectors(), fetchSources()]);
-  await fetchArticles();
+  try {
+    console.log("newsR0: Initializing...");
+    const [sectorsResult, sourcesResult] = await Promise.all([fetchSectors(), fetchSources()]);
+    console.log("newsR0: Sectors and sources loaded:", { sectors: state.allSectors.length, sources: state.allSources.length });
+    await fetchArticles();
+    console.log("newsR0: Articles loaded:", state.articles.length);
+  } catch (err) {
+    console.error("newsR0: Initialization failed:", err);
+  }
 })();
